@@ -16,8 +16,19 @@ export default function Hero() {
     "idle" | "loading" | "success" | "error"
   >("idle");
   const [message, setMessage] = useState("");
+  const [count, setCount] = useState<number | null>(null);
 
   useEffect(() => {
+    // Fetch waitlist count
+    fetch("/api/waitlist")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.count !== undefined) {
+          setCount(data.count);
+        }
+      })
+      .catch((err) => console.error("Failed to fetch count:", err));
+
     const ctx = gsap.context(() => {
       // Title animation - fade in and slide up
       gsap.fromTo(
@@ -79,6 +90,7 @@ export default function Hero() {
       setStatus("success");
       setMessage("You've been added to the waitlist!");
       setEmail("");
+      setCount((prev) => (prev ? prev + 1 : 1));
     } catch (error: any) {
       setStatus("error");
       setMessage(error.message);
@@ -113,6 +125,16 @@ export default function Hero() {
 
       <div ref={formRef} className={styles.bottomContainer}>
         <form onSubmit={handleSubmit} className={styles.form}>
+          {count !== null && (
+            <p className={styles.countText}>
+              Join{" "}
+              {new Intl.NumberFormat("en-US", {
+                notation: "compact",
+                compactDisplay: "short",
+              }).format(count + 100)}{" "}
+              others on the waitlist
+            </p>
+          )}
           <div className={styles.inputWrapper}>
             <input
               type="email"

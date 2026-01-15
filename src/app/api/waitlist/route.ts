@@ -40,3 +40,28 @@ export async function POST(request: Request) {
         );
     }
 }
+
+export async function GET() {
+    try {
+        const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+        const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+
+        const supabase = createClient(supabaseUrl, supabaseKey);
+
+        const { count, error } = await supabase
+            .from('waitlist')
+            .select('*', { count: 'exact', head: true });
+
+        if (error) {
+            throw error;
+        }
+
+        return NextResponse.json({ count });
+    } catch (error) {
+        console.error('Waitlist count error:', error);
+        return NextResponse.json(
+            { error: 'Failed to fetch count' },
+            { status: 500 }
+        );
+    }
+}
