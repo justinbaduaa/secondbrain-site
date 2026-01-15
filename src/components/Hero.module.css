@@ -34,10 +34,12 @@
   filter: brightness(0) invert(1);
 }
 
-.logo {
-  height: 24px; /* Reduced height to better match text/logo proportion */
-  width: auto;
-  object-fit: contain;
+.logoText {
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #fff;
+  letter-spacing: -0.03em;
 }
 
 .brainContainer {
@@ -51,6 +53,8 @@
   overflow: visible;
   /* Gentle float animation */
   animation: float 6s ease-in-out infinite;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .brain {
@@ -62,6 +66,7 @@
   -webkit-user-select: none;
   pointer-events: none;
   -webkit-touch-callout: none;
+  -webkit-user-drag: none;
 }
 
 /* Soft white glow behind brain */
@@ -335,8 +340,8 @@
     height: 24px;
   }
 
-  .logo {
-    height: 18px;
+  .logoText {
+    font-size: 1.25rem;
   }
   
   .button {

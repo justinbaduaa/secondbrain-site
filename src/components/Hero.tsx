@@ -63,8 +63,7 @@ export default function Hero() {
       <div className={styles.logoContainer}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/brain logo pink.png" alt="" className={styles.brainLogo} />
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/logo.png" alt="secondbrain" className={styles.logo} />
+        <span className={styles.logoText}>secondbrain</span>
       </div>
       <div className={styles.heroContent}>
         <h1 ref={titleRef} className={styles.title}>
@@ -77,7 +76,12 @@ export default function Hero() {
       <div ref={brainRef} className={styles.brainContainer}>
         <div className={styles.brainGlow} />
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/brain.png" alt="Second Brain" className={styles.brain} />
+        <img
+          src="/brain.png"
+          alt="Second Brain"
+          className={styles.brain}
+          draggable={false}
+        />
       </div>
 
       <div ref={formRef} className={styles.bottomContainer}>
