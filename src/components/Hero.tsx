@@ -62,7 +62,7 @@ export default function Hero() {
     <section ref={heroRef} className={styles.hero}>
       <div className={styles.heroContent}>
         <h1 ref={titleRef} className={styles.title}>
-          Gaels, tap into <ShinyText>your</ShinyText>
+          Gaels, tap into <span className={styles.highlight}>your</span>
           <br />
           second brain...
         </h1>

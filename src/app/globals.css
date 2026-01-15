@@ -1,3 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+@font-face {
+  font-family: 'ITC Garamond';
+  src: url('/ITCGaramondStd-BkNarrowIta.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
 :root {
   --background: #020617; /* Deepest slate/blue */
   --foreground: #ffffff;
@@ -7,7 +17,8 @@
   --color-secondary: #8b5cf6;
   --color-accent: #ec4899;
 
-  --font-main: var(--font-inter);
+  --font-main: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-accent: 'ITC Garamond', Georgia, serif;
 }
 
 * {
@@ -26,7 +37,7 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
   color: var(--foreground);
-  font-family: var(--font-main), "Inter", system-ui, sans-serif;
+  font-family: var(--font-main), "Plus Jakarta Sans", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   background: #d0e7ff; /* Match sky background color to avoid gradient flash */
 }
