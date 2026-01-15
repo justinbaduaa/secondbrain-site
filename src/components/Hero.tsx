@@ -60,6 +60,12 @@ export default function Hero() {
 
   return (
     <section ref={heroRef} className={styles.hero}>
+      <div className={styles.logoContainer}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/brain logo pink.png" alt="" className={styles.brainLogo} />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/logo.png" alt="secondbrain" className={styles.logo} />
+      </div>
       <div className={styles.heroContent}>
         <h1 ref={titleRef} className={styles.title}>
           Gaels, tap into <span className={styles.highlight}>your</span>
