@@ -35,7 +35,7 @@ html {
 body {
   height: 100%;
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: hidden;
   color: var(--foreground);
   font-family: var(--font-main), "Plus Jakarta Sans", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -47,36 +47,3 @@ a {
   text-decoration: none;
 }
 
-/* Modern Minimal Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(100, 130, 180, 0.3);
-  border-radius: 100px;
-  transition: background 0.2s ease;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(100, 130, 180, 0.5);
-}
-
-/* Hide scrollbar by default, show on scroll/hover */
-body::-webkit-scrollbar-thumb {
-  background: rgba(100, 130, 180, 0.15);
-}
-
-body:hover::-webkit-scrollbar-thumb {
-  background: rgba(100, 130, 180, 0.3);
-}
-
-/* Firefox scrollbar */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(100, 130, 180, 0.3) transparent;
-}
