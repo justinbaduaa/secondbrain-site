@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-import Background from "@/components/Background";
 
 const plusJakarta = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta",
@@ -21,8 +20,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${plusJakarta.variable}`}>
-        <Background />
+      <body
+        className={`${plusJakarta.variable}`}
+        style={{ background: "#FDFEFF" }}
+      >
         {children}
       </body>
     </html>

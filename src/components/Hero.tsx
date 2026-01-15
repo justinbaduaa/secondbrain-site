@@ -1,34 +1,16 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import styles from "./Hero.module.css";
 import ShinyText from "./ShinyText";
 
 export default function Hero() {
-  const [email, setEmail] = useState("");
   const heroRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const brainRef = useRef<HTMLDivElement>(null);
-  const formRef = useRef<HTMLDivElement>(null);
-
-  const [status, setStatus] = useState<
-    "idle" | "loading" | "success" | "error"
-  >("idle");
-  const [message, setMessage] = useState("");
-  const [count, setCount] = useState<number | null>(null);
 
   useEffect(() => {
-    // Fetch waitlist count
-    fetch("/api/waitlist")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.count !== undefined) {
-          setCount(data.count);
-        }
-      })
-      .catch((err) => console.error("Failed to fetch count:", err));
-
     const ctx = gsap.context(() => {
       // Title animation - fade in and slide up
       gsap.fromTo(
@@ -55,47 +37,10 @@ export default function Hero() {
           repeat: -1,
         });
       }
-
-      // Form animation - fade in from below
-      gsap.fromTo(
-        formRef.current,
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out", delay: 0.6 }
-      );
     }, heroRef);
 
     return () => ctx.revert();
   }, []);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email) return;
-
-    setStatus("loading");
-    setMessage("");
-
-    try {
-      const res = await fetch("/api/waitlist", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.error || "Something went wrong");
-      }
-
-      setStatus("success");
-      setMessage("You've been added to the waitlist!");
-      setEmail("");
-      setCount((prev) => (prev ? prev + 1 : 1));
-    } catch (error: any) {
-      setStatus("error");
-      setMessage(error.message);
-    }
-  };
 
   return (
     <section ref={heroRef} className={styles.hero}>
@@ -123,53 +68,18 @@ export default function Hero() {
         />
       </div>
 
-      <div ref={formRef} className={styles.bottomContainer}>
-        <form onSubmit={handleSubmit} className={styles.form}>
-          {count !== null && (
-            <p className={styles.countText}>
-              Join{" "}
-              {new Intl.NumberFormat("en-US", {
-                notation: "compact",
-                compactDisplay: "short",
-              }).format(count + 100)}{" "}
-              others on the waitlist
-            </p>
-          )}
-          <div className={styles.inputWrapper}>
-            <input
-              type="email"
-              placeholder="Enter your email address..."
-              className={styles.input}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              disabled={status === "loading" || status === "success"}
-            />
-            <button
-              type="submit"
-              className={styles.button}
-              disabled={status === "loading" || status === "success"}
-            >
-              {status === "loading"
-                ? "joining..."
-                : status === "success"
-                ? "joined!"
-                : "join the waitlist"}
-            </button>
-          </div>
-          {message && (
-            <div
-              style={{
-                marginTop: "1rem",
-                color: status === "error" ? "#ff6b6b" : "#4ecdc4",
-                fontSize: "0.9rem",
-                textAlign: "center",
-              }}
-            >
-              {message}
-            </div>
-          )}
-        </form>
+      <div className={styles.scrollIndicator}>
+        <span className={styles.scrollText}>scroll to join waitlist</span>
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+        >
+          <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
+        </svg>
       </div>
     </section>
   );

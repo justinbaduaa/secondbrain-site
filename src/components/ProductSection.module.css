@@ -1,0 +1,243 @@
+.section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  padding: 4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  z-index: 10;
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 800px;
+  background: url('/brain.png') no-repeat center center;
+  background-size: contain;
+  opacity: 0.03;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.leftColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  text-align: center;
+  align-items: center;
+  max-width: 600px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.logoText {
+  font-family: var(--font-plus-jakarta);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #333;
+}
+
+.title {
+  font-family: var(--font-plus-jakarta);
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #1a1a1a;
+}
+
+.highlight {
+  color: #e85d75; /* Brain pink */
+}
+
+.subtitle {
+  font-family: var(--font-plus-jakarta);
+  font-size: 1.1rem;
+  color: #666;
+  max-width: 500px;
+  line-height: 1.6;
+}
+
+.form {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.inputWrapper {
+  display: flex;
+  gap: 0;
+  background: white;
+  padding: 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e5e5;
+  overflow: hidden;
+  width: 100%;
+  max-width: 480px;
+}
+
+.input {
+  flex: 1;
+  padding: 1rem 1.5rem;
+  border: none;
+  font-family: var(--font-plus-jakarta);
+  font-size: 1rem;
+  outline: none;
+  color: #333;
+  background: transparent;
+}
+
+.button {
+  padding: 1rem 2rem;
+  background: #1a1a1a;
+  color: white;
+  border: none;
+  font-family: var(--font-plus-jakarta);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.button:hover {
+  background: #333;
+}
+
+.button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.rightColumn {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+}
+
+.videoContainer {
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.12);
+  background: #f5f5f5;
+}
+
+.video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 16px;
+}
+
+@media (max-width: 968px) {
+  .section {
+    padding: 2rem 1rem;
+  }
+
+  .title {
+    font-size: 1.75rem;
+    line-height: 1.2;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+  }
+
+  .inputWrapper {
+    flex-direction: column;
+    border-radius: 12px;
+  }
+
+  .input {
+    width: 100%;
+    text-align: center;
+  }
+
+  .button {
+    width: 100%;
+    border-radius: 8px;
+  }
+
+  .rightColumn {
+    max-width: 100%;
+  }
+
+  .videoContainer {
+    border-radius: 12px;
+  }
+}
+
+/* Video Modal */
+.videoModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.videoModalContent {
+  position: relative;
+  width: 90%;
+  max-width: 1200px;
+  cursor: default;
+}
+
+.closeButton {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  line-height: 1;
+}
+
+.closeButton:hover {
+  color: #ccc;
+}
+
+.videoZoomed {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
