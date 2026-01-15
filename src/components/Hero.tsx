@@ -12,6 +12,11 @@ export default function Hero() {
   const brainRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
 
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
+  const [message, setMessage] = useState("");
+
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Title animation - fade in and slide up
@@ -51,11 +56,33 @@ export default function Hero() {
     return () => ctx.revert();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Submitted email:", email);
-    alert(`Added ${email} to the waitlist! (Simulation)`);
-    setEmail("");
+    if (!email) return;
+
+    setStatus("loading");
+    setMessage("");
+
+    try {
+      const res = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Something went wrong");
+      }
+
+      setStatus("success");
+      setMessage("You've been added to the waitlist!");
+      setEmail("");
+    } catch (error: any) {
+      setStatus("error");
+      setMessage(error.message);
+    }
   };
 
   return (
@@ -94,11 +121,32 @@ export default function Hero() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              disabled={status === "loading" || status === "success"}
             />
-            <button type="submit" className={styles.button}>
-              join the waitlist
+            <button
+              type="submit"
+              className={styles.button}
+              disabled={status === "loading" || status === "success"}
+            >
+              {status === "loading"
+                ? "joining..."
+                : status === "success"
+                ? "joined!"
+                : "join the waitlist"}
             </button>
           </div>
+          {message && (
+            <div
+              style={{
+                marginTop: "1rem",
+                color: status === "error" ? "#ff6b6b" : "#4ecdc4",
+                fontSize: "0.9rem",
+                textAlign: "center",
+              }}
+            >
+              {message}
+            </div>
+          )}
         </form>
       </div>
     </section>
