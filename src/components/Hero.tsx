@@ -18,16 +18,21 @@ export default function Hero() {
     <section className={styles.hero}>
       <div className={styles.heroContent}>
         <h1 className={styles.title}>
-          Your Second Brain,
+          Gaels, tap into <span className={styles.highlight}>your</span>
           <br />
-          Just a Thought Away.
+          second brain...
         </h1>
-        <p className={styles.subtitle}>
-          Automate the small tasks that usually break your flow—like setting
-          reminders, sending drafts, or saving notes—just by using your voice.
-        </p>
+      </div>
 
+      <div className={styles.brainContainer}>
+        <div className={styles.brainGlow} />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/brain.png" alt="Second Brain" className={styles.brain} />
+      </div>
+
+      <div className={styles.bottomContainer}>
         <form onSubmit={handleSubmit} className={styles.form}>
+          {/* Visual replacement for QR code in a web context is often the input field itself */}
           <div className={styles.inputWrapper}>
             <input
               type="email"
@@ -38,10 +43,15 @@ export default function Hero() {
               required
             />
             <button type="submit" className={styles.button}>
-              Join Waitlist
+              join the waitlist
             </button>
           </div>
         </form>
+        {/* Optional: Add QR code if user strictly wants it, but usually web LP replaces QR with form. 
+             If I strictly duplicate the poster, I'd put a QR code. 
+             But "website to look like this" usually means adapt the design. 
+             I'll stick to the form for now as it's more useful, but style the button to match the text.
+         */}
       </div>
     </section>
   );

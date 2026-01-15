@@ -3,9 +3,9 @@ import styles from "./Background.module.css";
 export default function Background() {
   return (
     <div className={styles.backgroundContainer}>
-      <div className={styles.cloud1} />
-      <div className={styles.cloud2} />
-      <div className={styles.glow} />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/backgroundv2.png" alt="" className={styles.backgroundImage} />
+      <div className={styles.overlay} />
     </div>
   );
 }
