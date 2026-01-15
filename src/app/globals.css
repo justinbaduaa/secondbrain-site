@@ -16,16 +16,56 @@
   margin: 0;
 }
 
-html,
-body {
-  max-width: 100vw;
+html {
+  height: 100%;
   overflow-x: hidden;
+}
+
+body {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
   color: var(--foreground);
   font-family: var(--font-main), "Inter", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  background: #d0e7ff; /* Match sky background color to avoid gradient flash */
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+/* Modern Minimal Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 130, 180, 0.3);
+  border-radius: 100px;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 130, 180, 0.5);
+}
+
+/* Hide scrollbar by default, show on scroll/hover */
+body::-webkit-scrollbar-thumb {
+  background: rgba(100, 130, 180, 0.15);
+}
+
+body:hover::-webkit-scrollbar-thumb {
+  background: rgba(100, 130, 180, 0.3);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(100, 130, 180, 0.3) transparent;
 }

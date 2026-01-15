@@ -6,14 +6,37 @@
   height: 100vh;
   z-index: -1;
   overflow: hidden;
-  background-color: var(--background);
+  background: #d0e7ff; /* Solid sky color - no gradient flash */
 }
 
 .backgroundImage {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
+}
+
+/* Desktop background - visible on screens wider than 768px */
+.desktopBg {
+  display: block;
+}
+
+.phoneBg {
+  display: none;
+}
+
+/* Phone background - visible on mobile screens */
+@media (max-width: 768px) {
+  .desktopBg {
+    display: none;
+  }
+  
+  .phoneBg {
+    display: block;
+  }
 }
 
 /* Optional overlay to ensure text readability if the image is too bright */
@@ -23,6 +46,6 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: transparent; /* Let the background show through clearly */
+  background: transparent;
   pointer-events: none;
 }

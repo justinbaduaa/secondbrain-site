@@ -1,38 +1,81 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import gsap from "gsap";
 import styles from "./Hero.module.css";
+import ShinyText from "./ShinyText";
 
 export default function Hero() {
   const [email, setEmail] = useState("");
+  const heroRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const brainRef = useRef<HTMLDivElement>(null);
+  const formRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Title animation - fade in and slide up
+      gsap.fromTo(
+        titleRef.current,
+        { opacity: 0, y: 40 },
+        { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
+      );
+
+      // Brain container animation - fade in with scale
+      gsap.fromTo(
+        brainRef.current,
+        { opacity: 0, scale: 0.9 },
+        { opacity: 1, scale: 1, duration: 1.2, ease: "power2.out", delay: 0.3 }
+      );
+
+      // Brain floating animation - gentle up and down
+      const brainImg = brainRef.current?.querySelector(`.${styles.brain}`);
+      if (brainImg) {
+        gsap.to(brainImg, {
+          y: -15,
+          duration: 3,
+          ease: "sine.inOut",
+          yoyo: true,
+          repeat: -1,
+        });
+      }
+
+      // Form animation - fade in from below
+      gsap.fromTo(
+        formRef.current,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out", delay: 0.6 }
+      );
+    }, heroRef);
+
+    return () => ctx.revert();
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Submitted email:", email);
-    // Add logic to send email to backend or API
     alert(`Added ${email} to the waitlist! (Simulation)`);
     setEmail("");
   };
 
   return (
-    <section className={styles.hero}>
+    <section ref={heroRef} className={styles.hero}>
       <div className={styles.heroContent}>
-        <h1 className={styles.title}>
-          Gaels, tap into <span className={styles.highlight}>your</span>
+        <h1 ref={titleRef} className={styles.title}>
+          Gaels, tap into <ShinyText>your</ShinyText>
           <br />
           second brain...
         </h1>
       </div>
 
-      <div className={styles.brainContainer}>
+      <div ref={brainRef} className={styles.brainContainer}>
         <div className={styles.brainGlow} />
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/brain.png" alt="Second Brain" className={styles.brain} />
       </div>
 
-      <div className={styles.bottomContainer}>
+      <div ref={formRef} className={styles.bottomContainer}>
         <form onSubmit={handleSubmit} className={styles.form}>
-          {/* Visual replacement for QR code in a web context is often the input field itself */}
           <div className={styles.inputWrapper}>
             <input
               type="email"
@@ -47,11 +90,6 @@ export default function Hero() {
             </button>
           </div>
         </form>
-        {/* Optional: Add QR code if user strictly wants it, but usually web LP replaces QR with form. 
-             If I strictly duplicate the poster, I'd put a QR code. 
-             But "website to look like this" usually means adapt the design. 
-             I'll stick to the form for now as it's more useful, but style the button to match the text.
-         */}
       </div>
     </section>
   );
