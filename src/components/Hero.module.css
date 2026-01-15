@@ -19,8 +19,8 @@
 
 .brainContainer {
   position: relative;
-  width: 500px;
-  height: 500px;
+  width: 600px;
+  height: 600px;
   margin: 2rem 0;
   display: flex;
   justify-content: center;
@@ -35,6 +35,10 @@
   height: 100%;
   object-fit: contain;
   z-index: 2;
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
+  -webkit-touch-callout: none;
 }
 
 /* Soft white glow behind brain */
@@ -43,15 +47,14 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 250%;
-  height: 250%;
+  width: 150%;
+  height: 150%;
   background: radial-gradient(
     circle,
-    rgba(255, 255, 255, 0.85) 0%,
-    rgba(255, 255, 255, 0.6) 20%,
-    rgba(255, 255, 255, 0.35) 40%,
-    rgba(255, 255, 255, 0.15) 60%,
-    transparent 80%
+    rgba(255, 255, 255, 0.7) 0%,
+    rgba(255, 255, 255, 0.4) 30%,
+    rgba(255, 255, 255, 0.15) 55%,
+    transparent 75%
   );
   z-index: 0;
   opacity: 1;
@@ -235,38 +238,95 @@
 
 /* Responsive styles */
 @media (max-width: 768px) {
+  .hero {
+    padding: 1.5rem 1.25rem;
+    justify-content: center;
+  }
+
   .title {
-    font-size: 2.5rem;
+    font-size: 1.85rem;
+    line-height: 1.25;
+    letter-spacing: -0.03em;
+    text-shadow: 0 4px 16px rgba(0,0,0,0.2), 0 2px 4px rgba(0,0,0,0.2);
+  }
+
+  .highlight {
+    font-size: 1.12em;
+    margin: 0 0.05em;
   }
   
   .bottomContainer {
-    margin-top: 2rem;
+    margin-top: 1.5rem;
+    padding: 0;
+    width: 100%;
   }
   
   .brainContainer {
-    width: 200px;
-    height: 200px;
+    width: 260px;
+    height: 260px;
+    margin: 1rem 0;
+  }
+
+  .brainGlow {
+    width: 140%;
+    height: 140%;
+  }
+
+  .form {
+    max-width: 100%;
+    width: 100%;
   }
   
+  /* Keep the sleek pill style on mobile */
   .inputWrapper {
-    flex-direction: column;
-    border-radius: 1rem;
-    background: transparent;
-    border: none;
-    backdrop-filter: none;
-    box-shadow: none;
+    flex-direction: row;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 0.35rem;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    gap: 0.25rem;
   }
   
   .input {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 0.75rem;
-    text-align: center;
-    margin-bottom: 0.5rem;
+    background: transparent;
+    border: none;
+    border-radius: 9999px;
+    text-align: left;
+    padding: 0.65rem 1rem;
+    font-size: 0.9rem;
+    min-width: 0;
+  }
+
+  .input::placeholder {
+    font-size: 0.85rem;
   }
   
   .button {
-    width: 100%;
-    border-radius: 0.75rem;
+    flex-shrink: 0;
+    border-radius: 9999px;
+    padding: 0.65rem 1rem;
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 400px) {
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .brainContainer {
+    width: 220px;
+    height: 220px;
+  }
+
+  .button {
+    padding: 0.6rem 0.85rem;
+    font-size: 0.75rem;
+  }
+
+  .input {
+    padding: 0.6rem 0.85rem;
   }
 }

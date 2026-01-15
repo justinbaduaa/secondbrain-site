@@ -17,6 +17,10 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
+  -webkit-touch-callout: none;
 }
 
 /* Desktop background - visible on screens wider than 768px */
