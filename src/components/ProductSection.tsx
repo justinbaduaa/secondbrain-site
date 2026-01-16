@@ -66,13 +66,16 @@ export default function ProductSection() {
             </div>
 
             <h2 className={styles.title}>
-              Automate small tasks with{" "}
-              <span className={styles.highlight}>just your voice</span>
+              Stop worrying about the{" "}
+              <span className={styles.highlight}>little things</span>...
             </h2>
 
             <p className={styles.subtitle}>
-              A menu bar app that handles reminders, drafts, and more—no
-              commands to memorize. Just speak naturally.
+              We're four{" "}
+              <span className={styles.queens}>Queen's</span> students who
+              believe we can work more immersively{" "}
+              <strong className={styles.emphasis}>without</strong> letting the
+              little stuff pile up.
             </p>
 
             <form onSubmit={handleSubmit} className={styles.form}>

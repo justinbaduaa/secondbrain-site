@@ -84,6 +84,20 @@
   line-height: 1.6;
 }
 
+.queens {
+  font-family: inherit;
+  font-weight: 700;
+  font-style: normal;
+  background: linear-gradient(90deg, #2563eb 0%, #facc15 50%, #dc2626 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.emphasis {
+  font-weight: 700;
+}
+
 .form {
   margin-top: 0.5rem;
   display: flex;
